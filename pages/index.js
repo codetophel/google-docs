@@ -2,8 +2,13 @@ import Head from 'next/head';
 import DocsSection from '../components/DocsSection';
 import Header from '../components/Header';
 import NewDoc from '../components/NewDoc';
+import { useSession } from 'next-auth/react';
+import SignIn from './auth/signin';
+import Login from '../components/Login';
 
 export default function Home() {
+  const { data: session } = useSession();
+
   return (
     <div>
       <Head>
@@ -12,14 +17,20 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Header />
+      {session ? (
+        <>
+          <Header />
 
-      <section className='bg-[#f8f9fa] pb-10 px-10'>
-        <NewDoc />
-      </section>
-      <section className='px-10 md:px-0'>
-        <DocsSection />
-      </section>
+          <section className='bg-[#f8f9fa] pb-10 px-10'>
+            <NewDoc />
+          </section>
+          <section className='px-10 md:px-0'>
+            <DocsSection />
+          </section>
+        </>
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }
