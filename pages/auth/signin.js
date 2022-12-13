@@ -1,4 +1,4 @@
-import { getProviders, signIn as signIntoBrowser } from 'next-auth/react';
+import { signIn as signIntoBrowser } from 'next-auth/react';
 
 export default function SignIn({ providers }) {
   return (
@@ -24,11 +24,4 @@ export default function SignIn({ providers }) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const providers = await getProviders();
-  return {
-    props: { providers },
-  };
 }

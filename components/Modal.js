@@ -7,15 +7,28 @@ import {
 } from '@material-tailwind/react';
 import { useDispatch } from 'react-redux';
 import { closeModal, openModal } from '../features/modalSlice';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../db/firebase';
+import { useSession } from 'next-auth/react';
 
 const Modal = () => {
+  const { data: session } = useSession();
   const [input, setInput] = useState('');
 
   const dispatch = useDispatch();
 
-  const createDocument = () => {
-    console.log('docs');
+  const createDocument = async () => {
+    if (!input) return;
+
+    await addDoc(collection(db, 'userDocs', session.user.email, 'docs'), {
+      fileName: input,
+      timestamp: serverTimestamp(),
+    });
+
+    dispatch(closeModal());
+    setInput('');
   };
+
   return (
     <Dialog open={true} handler={() => dispatch(openModal())}>
       <DialogBody>
