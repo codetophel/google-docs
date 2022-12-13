@@ -3,11 +3,16 @@ import DocsSection from '../components/DocsSection';
 import Header from '../components/Header';
 import NewDoc from '../components/NewDoc';
 import { useSession } from 'next-auth/react';
-import SignIn from './auth/signin';
 import Login from '../components/Login';
+import Modal from '../components/Modal';
+import { useSelector } from 'react-redux';
+import { selectModalIsOpen } from '../features/modalSlice';
 
-export default function Home() {
+function Home() {
   const { data: session } = useSession();
+  const modalIsOpen = useSelector(selectModalIsOpen);
+
+  if (!session) return <Login />;
 
   return (
     <div>
@@ -17,20 +22,17 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      {session ? (
-        <>
-          <Header />
+      <Header />
+      {modalIsOpen && <Modal />}
 
-          <section className='bg-[#f8f9fa] pb-10 px-10'>
-            <NewDoc />
-          </section>
-          <section className='px-10 md:px-0'>
-            <DocsSection />
-          </section>
-        </>
-      ) : (
-        <Login />
-      )}
+      <section className='bg-[#f8f9fa] pb-10 px-10'>
+        <NewDoc />
+      </section>
+      <section className='px-10 md:px-0'>
+        <DocsSection />
+      </section>
     </div>
   );
 }
+
+export default Home;

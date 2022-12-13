@@ -8,7 +8,6 @@ const Header = () => {
   return (
     <div className='flex items-center px-5 py-2 shadow-md md:px-10'>
       <Bars3Icon className='h-7 w-7 text-gray-500 hidden md:inline-flex mr-3' />
-      {/* <DocumentMinusIcon className='h-10 w-10 text-blue-500' /> */}
       {/* eslint-disable-next-line */}
       <img
         src='https://cdn.cdnlogo.com/logos/g/44/google-docs-icon.svg'

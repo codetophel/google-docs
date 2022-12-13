@@ -1,7 +1,10 @@
 import React from 'react';
 import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../features/modalSlice';
 
 const NewDoc = () => {
+  const dispatch = useDispatch(openModal);
   return (
     <div className='max-w-3xl mx-auto'>
       <div className='flex items-center justify-between py-5'>
@@ -11,7 +14,7 @@ const NewDoc = () => {
         <EllipsisVerticalIcon className='h-7 w-7 text-gray-700 cursor-pointer' />
       </div>
 
-      <div className='relative'>
+      <div className='relative' onClick={() => dispatch(openModal())}>
         {/* eslint-disable-next-line */}
         <img
           src='https://ssl.gstatic.com/docs/templates/thumbnails/docs-blank-googlecolors.png'
