@@ -23,6 +23,7 @@ function Home() {
       </Head>
 
       <Header />
+
       {modalIsOpen && <Modal />}
 
       <section className='bg-[#f8f9fa] pb-10 px-10'>

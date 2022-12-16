@@ -7,7 +7,12 @@ import {
 } from '@material-tailwind/react';
 import { useDispatch } from 'react-redux';
 import { closeModal, openModal } from '../features/modalSlice';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  orderBy,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { db } from '../db/firebase';
 import { useSession } from 'next-auth/react';
 
